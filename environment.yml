@@ -1,0 +1,13 @@
+name: s2l
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pytorch>=2.1
+  - torchvision
+  - pytorch-cuda=12.1
+  - pip
+  - pip:
+      - timm==0.9.16

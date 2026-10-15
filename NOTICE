@@ -1,0 +1,36 @@
+Copy the Same, Distill the Difference: Initializing Linear Vision Transformers
+Copyright 2026 Huaiyuan Qin and co-authors
+
+This software is a derivative work of
+
+  * timm / pytorch-image-models (https://github.com/huggingface/pytorch-image-models),
+    version 0.9.16, Copyright 2019 Ross Wightman, licensed under the Apache License 2.0;
+    `s2l/vision_transformer.py`, `s2l/datasets.py` and `train.py` are modified copies of
+    `timm/models/vision_transformer.py`, `timm/data/dataset_factory.py` and `train.py`.
+
+  * Structured Initialization for Attention in Vision Transformers
+    (https://github.com/osiriszjq/structured_init), Copyright (c) 2024 Jianqiao Zheng,
+    licensed under the MIT License (reproduced below); the Mimetic / Impulse initializations
+    and the sinusoidal position embedding in `s2l/vision_transformer.py` come from this code.
+
+MIT License
+
+Copyright (c) 2024 Jianqiao Zheng
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
