@@ -11,8 +11,8 @@ Wu Liu<sup>6</sup>&nbsp;&nbsp;&nbsp;&nbsp; Xi Peng<sup>4</sup>&nbsp;&nbsp;&nbsp;
 </p>
 
 <p>
-<sup>1</sup>Institute of Advanced Intelligence and Computing (IAIC), A*STAR, Singapore&nbsp;&nbsp;&nbsp;&nbsp; <sup>2</sup>Nanyang Technological University<br>
-<sup>3</sup>ST Engineering Geo-Insights, Singapore&nbsp;&nbsp;&nbsp;&nbsp; <sup>4</sup>Sichuan University<br>
+<sup>1</sup>Institute of Advanced Intelligence and Computing (IAIC), A*STAR, Singapore<br>
+<sup>2</sup>Nanyang Technological University&nbsp;&nbsp;&nbsp;&nbsp; <sup>3</sup>ST Engineering Geo-Insights, Singapore&nbsp;&nbsp;&nbsp;&nbsp; <sup>4</sup>Sichuan University<br>
 <sup>5</sup>Shanghai Jiao Tong University&nbsp;&nbsp;&nbsp;&nbsp; <sup>6</sup>University of Science and Technology of China
 </p>
 
