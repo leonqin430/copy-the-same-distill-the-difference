@@ -4,14 +4,17 @@
 
 ### arXiv 2026
 
-Huaiyuan Qin<sup>1</sup>&nbsp;&nbsp; Muli Yang<sup>1</sup>&nbsp;&nbsp; Gabriel James Goenawan<sup>1</sup>&nbsp;&nbsp; Shiqi Huang<sup>2</sup>&nbsp;&nbsp; Min Kass Chong<sup>3</sup>&nbsp;&nbsp; Wahyu Wiratama<sup>3</sup>&nbsp;&nbsp; Peng Hu<sup>4</sup>&nbsp;&nbsp; Chen Gong<sup>5</sup>&nbsp;&nbsp; Wu Liu<sup>6</sup>&nbsp;&nbsp; Xi Peng<sup>4</sup>&nbsp;&nbsp; Chun Jian Ho<sup>3</sup>&nbsp;&nbsp; Hongyuan Zhu<sup>1</sup>
+<p>
+Huaiyuan Qin<sup>1</sup>&nbsp;&nbsp;&nbsp;&nbsp; Muli Yang<sup>1</sup>&nbsp;&nbsp;&nbsp;&nbsp; Gabriel James Goenawan<sup>1</sup>&nbsp;&nbsp;&nbsp;&nbsp; Shiqi Huang<sup>2</sup><br>
+Min Kass Chong<sup>3</sup>&nbsp;&nbsp;&nbsp;&nbsp; Wahyu Wiratama<sup>3</sup>&nbsp;&nbsp;&nbsp;&nbsp; Peng Hu<sup>4</sup>&nbsp;&nbsp;&nbsp;&nbsp; Chen Gong<sup>5</sup><br>
+Wu Liu<sup>6</sup>&nbsp;&nbsp;&nbsp;&nbsp; Xi Peng<sup>4</sup>&nbsp;&nbsp;&nbsp;&nbsp; Chun Jian Ho<sup>3</sup>&nbsp;&nbsp;&nbsp;&nbsp; Hongyuan Zhu<sup>1</sup>
+</p>
 
-<sup>1</sup>Institute of Advanced Intelligence and Computing (IAIC), A*STAR&nbsp;&nbsp;&nbsp;
-<sup>2</sup>Nanyang Technological University&nbsp;&nbsp;&nbsp;
-<sup>3</sup>ST Engineering Geo-Insights&nbsp;&nbsp;&nbsp;
-<sup>4</sup>Sichuan University&nbsp;&nbsp;&nbsp;
-<sup>5</sup>Shanghai Jiao Tong University&nbsp;&nbsp;&nbsp;
-<sup>6</sup>University of Science and Technology of China
+<p>
+<sup>1</sup>Institute of Advanced Intelligence and Computing (IAIC), A*STAR, Singapore&nbsp;&nbsp;&nbsp;&nbsp; <sup>2</sup>Nanyang Technological University<br>
+<sup>3</sup>ST Engineering Geo-Insights, Singapore&nbsp;&nbsp;&nbsp;&nbsp; <sup>4</sup>Sichuan University<br>
+<sup>5</sup>Shanghai Jiao Tong University&nbsp;&nbsp;&nbsp;&nbsp; <sup>6</sup>University of Science and Technology of China
+</p>
 
 [![arXiv](https://img.shields.io/badge/arXiv-2609.35745-b31b1b.svg)](https://arxiv.org/abs/2609.35745)
 [![Paper](https://img.shields.io/badge/Paper-PDF-orange.svg)](https://arxiv.org/pdf/2609.35745)
