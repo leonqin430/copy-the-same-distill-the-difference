@@ -1168,6 +1168,11 @@ class VisionTransformer(nn.Module):
             ckpt = torch.load(self.copy_ckpt_path, map_location='cpu', weights_only=False)
             teacher_state = ckpt['model'] if 'model' in ckpt else ckpt
             dim = self.embed_dim
+            t_qkv0 = teacher_state.get('blocks.0.attn.qkv.weight')
+            if t_qkv0 is None or t_qkv0.shape[1] != dim:
+                raise RuntimeError(
+                    f'copy init: checkpoint embed_dim {None if t_qkv0 is None else t_qkv0.shape[1]} does not match '
+                    f'the model embed_dim {dim} (check --model / the checkpoint size)')
             for i in range(self.depth):
                 qkv_w_key = f'blocks.{i}.attn.qkv.weight'
                 qkv_b_key = f'blocks.{i}.attn.qkv.bias'
@@ -1217,6 +1222,8 @@ class VisionTransformer(nn.Module):
                 else:
                     skipped += 1
             self.load_state_dict(student_state, strict=False)
+            if copied == 0:
+                raise RuntimeError(f'fullcopy init: no parameter of {self.copy_ckpt_path} matches the model (check --model / the checkpoint size)')
             print(f'fullcopy: copied {copied} params, skipped {skipped} (head/shape mismatch/missing)')
             del ckpt, teacher_state
         elif mode == 'ffncopy':
@@ -1242,6 +1249,8 @@ class VisionTransformer(nn.Module):
                 else:
                     skipped_other += 1
             self.load_state_dict(student_state, strict=False)
+            if copied == 0:
+                raise RuntimeError(f'ffncopy init: no MLP parameter of {self.copy_ckpt_path} matches the model (check --model / the checkpoint size)')
             print(f'ffncopy: copied {copied} params, skipped {skipped_attn} attn + {skipped_other} other (head/shape/missing)')
             del ckpt, teacher_state
 

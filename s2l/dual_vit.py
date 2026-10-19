@@ -121,6 +121,8 @@ class DualVisionTransformer(nn.Module):
         distill_lambda: Weight for distillation loss
         student_kwargs: kwargs passed to VisionTransformer for the student
         teacher_kwargs: kwargs for teacher (default: same as student but softmax)
+        model_name: timm entrypoint (e.g. 'vit_small_patch16_224') that fixes embed_dim / depth / num_heads
+            for both networks; without it the kwargs must carry these sizes themselves
     """
 
     def __init__(
@@ -130,6 +132,7 @@ class DualVisionTransformer(nn.Module):
         distill_loss_type: str = 'mse_out',
         student_kwargs: dict = None,
         teacher_kwargs: dict = None,
+        model_name: str = None,
     ):
         super().__init__()
         self.distill_lambda = distill_lambda
@@ -137,8 +140,14 @@ class DualVisionTransformer(nn.Module):
             raise ValueError(f'Unknown distill_loss_type: {distill_loss_type}')
         self.distill_loss_type = distill_loss_type
 
+        def _build(kwargs):
+            if model_name:
+                from timm.models import create_model
+                return create_model(model_name, pretrained=False, **kwargs)
+            return VisionTransformer(**kwargs)
+
         # Build student (linear attention)
-        self.student = VisionTransformer(**student_kwargs)
+        self.student = _build(student_kwargs)
 
         # Build teacher (softmax attention, always CLS token + learned PE)
         if teacher_kwargs is None:
@@ -150,7 +159,7 @@ class DualVisionTransformer(nn.Module):
             teacher_kwargs['class_token'] = True
             teacher_kwargs['no_embed_class'] = False
             teacher_kwargs['sin_pe'] = False
-        self.teacher = VisionTransformer(**teacher_kwargs)
+        self.teacher = _build(teacher_kwargs)
 
         # Load teacher weights (skip head and any shape-mismatched keys)
         ckpt = torch.load(teacher_ckpt, map_location='cpu', weights_only=False)
@@ -158,6 +167,10 @@ class DualVisionTransformer(nn.Module):
         model_state = self.teacher.state_dict()
         filtered = {k: v for k, v in teacher_state.items()
                     if k in model_state and model_state[k].shape == v.shape}
+        if not filtered:
+            raise RuntimeError(
+                f'Teacher checkpoint {teacher_ckpt} matches no parameter of the teacher model: '
+                f'the model size (--model / embed_dim, depth, num_heads) does not fit the checkpoint.')
         msg = self.teacher.load_state_dict(filtered, strict=False)
         print(f'Teacher loaded from {teacher_ckpt}: {len(filtered)} params loaded, {len(msg.missing_keys)} missing')
         del ckpt, teacher_state, filtered

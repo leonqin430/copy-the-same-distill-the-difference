@@ -15,6 +15,7 @@ NVIDIA CUDA specific speedups adopted from NVIDIA Apex examples
 Hacked together by / Copyright 2020 Ross Wightman (https://github.com/rwightman)
 """
 import argparse
+import ast
 import importlib
 import json
 import logging
@@ -43,6 +44,23 @@ from timm.utils import ApexScaler, NativeScaler
 import s2l  # noqa: F401  registers the linear-attention ViT entrypoints with timm
 from s2l.datasets import create_dataset
 from s2l.dual_vit import DualVisionTransformer
+
+
+class ParseKwargs(argparse.Action):
+    """Parse `key=value` pairs for --model-kwargs: values are Python literals when possible, otherwise kept as
+    strings (checkpoint paths, 'mimetic0.7_0.7', ...). Stock timm only catches ValueError, which lets
+    ast.literal_eval raise SyntaxError on such values."""
+
+    def __call__(self, parser, namespace, values, option_string=None):
+        kw = {}
+        for value in values:
+            key, value = value.split('=', 1)
+            try:
+                kw[key] = ast.literal_eval(value)
+            except (ValueError, SyntaxError):
+                kw[key] = str(value)
+        setattr(namespace, self.dest, kw)
+
 
 try:
     from apex import amp
@@ -160,7 +178,7 @@ group.add_argument('--grad-checkpointing', action='store_true', default=False,
                    help='Enable gradient checkpointing through model blocks/stages')
 group.add_argument('--fast-norm', default=False, action='store_true',
                    help='enable experimental fast-norm')
-group.add_argument('--model-kwargs', nargs='*', default={}, action=utils.ParseKwargs)
+group.add_argument('--model-kwargs', nargs='*', default={}, action=ParseKwargs)
 group.add_argument('--head-init-scale', default=None, type=float,
                    help='Head initialization scale')
 group.add_argument('--head-init-bias', default=None, type=float,
@@ -209,7 +227,7 @@ group.add_argument('--clip-mode', type=str, default='norm',
                    help='Gradient clipping mode. One of ("norm", "value", "agc")')
 group.add_argument('--layer-decay', type=float, default=None,
                    help='layer-wise learning rate decay (default: None)')
-group.add_argument('--opt-kwargs', nargs='*', default={}, action=utils.ParseKwargs)
+group.add_argument('--opt-kwargs', nargs='*', default={}, action=ParseKwargs)
 
 # Learning rate schedule parameters
 group = parser.add_argument_group('Learning rate schedule parameters')
@@ -498,6 +516,7 @@ def main():
             distill_lambda=args.distill_lambda,
             distill_loss_type=args.distill_loss,
             student_kwargs=student_kwargs,
+            model_name=args.model,
         )
         args.distill_mode = True
     else:
